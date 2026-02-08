@@ -1,49 +1,79 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fffef7;
-  --foreground: #171717;
-
-  /* Fresh-inspired color palette */
-  --accent: #86efac;
-  --accent-dark: #22c55e;
-  --accent-emphasis: #16a34a;
-  --lime: #bef264;
-  --yellow: #fde047;
-  --bg-1: #fffef7;
-  --bg-2: #fef9e7;
-  --border-muted: #e5e7eb;
+  /* Pocketful of Zest brand colors */
+  --zest-cream: #F9F7F1;
+  --zest-orange: #EA8234;
+  --zest-orange-hover: #D37128;
+  --zest-green-dark: #365E48;
+  --zest-green-body: #5C6F63;
+  --zest-green-pale: #CBD6C9;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-accent-dark: var(--accent-dark);
-  --color-accent-emphasis: var(--accent-emphasis);
-  --color-lime: var(--lime);
-  --color-yellow: var(--yellow);
-  --color-bg-1: var(--bg-1);
-  --color-bg-2: var(--bg-2);
-  --color-border-muted: var(--border-muted);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Brand colors */
+  --color-zest-cream: var(--zest-cream);
+  --color-zest-orange: var(--zest-orange);
+  --color-zest-orange-hover: var(--zest-orange-hover);
+  --color-zest-green-dark: var(--zest-green-dark);
+  --color-zest-green-body: var(--zest-green-body);
+  --color-zest-green-pale: var(--zest-green-pale);
 
-/* Dark mode support with proper contrast */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --bg-1: #1a1a1a;
-    --bg-2: #2a2a2a;
-    --border-muted: #3a3a3a;
-  }
+  /* Font families */
+  --font-heading: var(--font-poppins);
+  --font-body: var(--font-inter);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--zest-cream);
+  color: var(--zest-green-body);
+  font-family: var(--font-inter), sans-serif;
   min-height: 100vh;
+}
+
+/* Print styles - only show recipe card */
+@media print {
+  body > * {
+    display: none !important;
+  }
+
+  body > main {
+    display: block !important;
+  }
+
+  main > * {
+    display: none !important;
+  }
+
+  main article {
+    display: block !important;
+  }
+
+  article > *:not(#recipe) {
+    display: none !important;
+  }
+
+  #recipe {
+    display: block !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Hide print button when printing */
+  #recipe button {
+    display: none !important;
+  }
+
+  /* Remove page breaks inside recipe elements */
+  #recipe,
+  #recipe * {
+    page-break-inside: avoid;
+  }
+
+  /* Ensure metadata and image stay side-by-side when printing */
+  #recipe .grid {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr !important;
+  }
 }

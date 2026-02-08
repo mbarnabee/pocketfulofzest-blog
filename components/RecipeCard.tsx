@@ -30,11 +30,11 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
       )}
 
       {/* Article Title */}
-      <h1 className="text-4xl font-bold text-gray-800 mb-6">{recipe.title}</h1>
+      <h1 className="text-4xl font-heading font-bold text-zest-green-dark mb-6">{recipe.title}</h1>
 
       {/* Introduction */}
       {recipe.introduction && (
-        <div className="text-lg text-gray-700 mb-6 leading-relaxed">
+        <div className="text-lg text-zest-green-body mb-6 leading-relaxed">
           {recipe.introduction}
         </div>
       )}
@@ -59,18 +59,18 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
               },
               block: {
                 h2: ({ children }) => (
-                  <h2 className="text-2xl font-bold text-gray-800 mt-8 mb-4">{children}</h2>
+                  <h2 className="text-2xl font-heading font-bold text-zest-green-dark mt-8 mb-4">{children}</h2>
                 ),
                 h3: ({ children }) => (
-                  <h3 className="text-xl font-bold text-gray-800 mt-6 mb-3">{children}</h3>
+                  <h3 className="text-xl font-heading font-bold text-zest-green-dark mt-6 mb-3">{children}</h3>
                 ),
                 normal: ({ children }) => (
-                  <p className="text-gray-700 mb-4 leading-relaxed">{children}</p>
+                  <p className="text-zest-green-body mb-4 leading-relaxed">{children}</p>
                 ),
               },
               marks: {
                 strong: ({ children }) => (
-                  <strong className="font-bold text-gray-900">{children}</strong>
+                  <strong className="font-bold text-zest-green-dark">{children}</strong>
                 ),
                 em: ({ children }) => <em className="italic">{children}</em>,
                 link: ({ children, value }) => (
@@ -78,7 +78,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
                     href={value?.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-accent-emphasis hover:text-accent underline"
+                    className="text-zest-orange hover:text-zest-orange-hover underline"
                   >
                     {children}
                   </a>
@@ -92,25 +92,42 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
       {/* Recipe Card */}
       <div
         id="recipe"
-        className="bg-white border-2 border-accent rounded-xl p-6 shadow-lg"
+        className="bg-white border-2 border-zest-orange rounded-xl p-6 shadow-lg"
       >
         {/* Header */}
-        <div className="border-b-3 border-accent pb-4 mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
+        <div className="border-b-2 border-zest-green-pale pb-4 mb-6">
+          <h1 className="text-3xl font-heading font-bold text-zest-green-dark flex items-center gap-2">
             <span className="text-2xl">🍽️</span>
             {recipe.title}
           </h1>
         </div>
 
-        {/* Metadata */}
-        {(recipe.yield || recipe.prepTime || recipe.cookTime || recipe.totalTime) && (
-          <div className="mb-6">
-            <RecipeMeta
-              yield={recipe.yield}
-              prepTime={recipe.prepTime}
-              cookTime={recipe.cookTime}
-              totalTime={recipe.totalTime}
-            />
+        {/* Metadata and Image Row */}
+        {(recipe.yield || recipe.prepTime || recipe.cookTime || recipe.totalTime || recipe.coverImage) && (
+          <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr] gap-6 mb-6 items-start">
+            {/* Left: Metadata */}
+            {(recipe.yield || recipe.prepTime || recipe.cookTime || recipe.totalTime) && (
+              <div>
+                <RecipeMeta
+                  yield={recipe.yield}
+                  prepTime={recipe.prepTime}
+                  cookTime={recipe.cookTime}
+                  totalTime={recipe.totalTime}
+                />
+              </div>
+            )}
+
+            {/* Right: Cover Image */}
+            {recipe.coverImage && (
+              <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden">
+                <Image
+                  src={urlFor(recipe.coverImage).width(300).height(225).url()}
+                  alt={recipe.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
           </div>
         )}
 
@@ -139,7 +156,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
         {/* Print Button */}
         <button
           onClick={() => window.print()}
-          className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-accent to-lime text-gray-800 font-semibold rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+          className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-zest-orange text-white font-semibold rounded-lg shadow-md hover:bg-zest-orange-hover hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

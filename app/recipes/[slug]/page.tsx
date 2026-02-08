@@ -50,7 +50,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
       <div className="max-w-4xl mx-auto mb-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-accent-emphasis hover:text-accent font-medium transition-colors"
+          className="inline-flex items-center gap-2 text-zest-orange hover:text-zest-orange-hover font-medium transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
